@@ -1,4 +1,6 @@
 package com.platform.controller;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.platform.model.LoginBean;
 import com.platform.model.User;
+import com.platform.services.MailHandler;
 import com.platform.services.UsersHandler;
 @Controller
 public class PlatformController {
@@ -42,6 +45,15 @@ public class PlatformController {
 			us.setPassword(loginBean.getPassword());
 			us.setEmailId(loginBean.getEmailId());
 			if(userHandler.addUser(us)) {
+				try {
+					MailHandler.sendMail(loginBean.getEmailId(), "Welcome", "Thanks for signing up into Coders cafe");
+				} catch (AddressException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return "success";
 			}
 			map.addAttribute("message", "some error with signup");
