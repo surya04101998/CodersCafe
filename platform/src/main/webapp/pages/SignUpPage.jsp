@@ -20,14 +20,14 @@
 
 	<form:form action="addUser" method="post" modelAttribute="loginDetails">
 
-Enter UserName: <form:input path="username" />
+Enter UserName: <form:input path="username" /><form:errors path="username"></form:errors>
 		<br>
 		<br>
-Enter Password: <form:input type="password" path="password" />
+Enter Password: <form:input type="password" path="password" /><form:errors path="password"></form:errors>
 		<br>
 		<br>
 		
-Enter E-Mail: <form:input type="emailId" path="emailId" />
+Enter E-Mail: <form:input type="emailId" path="emailId" /><form:errors path="emailId"></form:errors>
 		<br>
 		<br>
 
